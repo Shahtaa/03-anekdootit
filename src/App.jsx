@@ -26,13 +26,31 @@ const App = () => {
     setVotes(copy);
   };
 
+  // Define the MostVotedAnecdote component within the App component
+  const MostVotedAnecdote = ({ anecdotes, votes }) => {
+    // Find the index of the anecdote with the most votes
+    const mostVotedIndex = votes.indexOf(Math.max(...votes));
+
+    return (
+      <div>
+        <h2>Anecdote with most votes</h2>
+        <div>{anecdotes[mostVotedIndex]}</div>
+        <div>has {Math.max(...votes)} votes</div>
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <div>{anecdotes[selected]}</div>
-      <div>has {votes[selected]} votes</div>
-      <button onClick={voteAnecdote}>vote</button>
-      <button onClick={nextAnecdote}>next anecdote</button>
-    </div>
+    <>
+      <div>
+        <h2>Anecdote of the day</h2>
+        <div>{anecdotes[selected]}</div>
+        <div>has {votes[selected]} votes</div>
+        <button onClick={voteAnecdote}>vote</button>
+        <button onClick={nextAnecdote}>next anecdote</button>
+      </div>
+      <MostVotedAnecdote anecdotes={anecdotes} votes={votes} />
+    </>
   );
 };
 
